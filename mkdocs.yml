@@ -1,0 +1,27 @@
+site_name: CiviRemote Expense
+site_description: Exposes CiviCRM expenses via the CiviRemote framework.
+site_author: SYSTOPIA
+site_url: https://github.com/systopia/remote_expense
+
+theme:
+  name: material
+
+nav:
+  - Introduction: index.md
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - def_list
+  - codehilite
+  - toc:
+      permalink: True
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tilde
+  - pymdownx.betterem
+  - pymdownx.mark
+
+plugins:
+  - search:
+      lang: en
