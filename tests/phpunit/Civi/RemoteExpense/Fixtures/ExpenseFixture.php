@@ -19,20 +19,19 @@ declare(strict_types = 1);
 
 namespace Civi\RemoteExpense\Fixtures;
 
-use Civi\Api4\CiviExpense;
+use \Civi\Api4\Expense;
 
 final class ExpenseFixture {
 
   /**
    * @phpstan-param array<string, scalar|null> $values
    *
-   * @phpstan-return array{id: int}&array<string, scalar|null>
+   * @phpstan-return array<string, scalar|null>
    *
    * @throws \CRM_Core_Exception
    */
   public static function addFixture(int $contactId, int $caseId, array $values = []): array {
-    // @phpstan-ignore-next-line
-    return CiviExpense::create(FALSE)->setValues([
+    return Expense::create(FALSE)->setValues([
       'type_id' => 1,
       'contact_id' => $contactId,
       'case_id' => $caseId,

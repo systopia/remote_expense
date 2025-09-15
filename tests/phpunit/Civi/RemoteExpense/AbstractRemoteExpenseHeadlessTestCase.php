@@ -40,9 +40,7 @@ abstract class AbstractRemoteExpenseHeadlessTestCase extends TestCase implements
 
   protected function setUp(): void {
     parent::setUp();
-    // @phpstan-ignore-next-line
     \CRM_Core_Config::singleton()->userFrameworkBaseURL = 'http://localhost/';
-    // @phpstan-ignore-next-line
     \CRM_Core_Config::singleton()->cleanURL = 1;
     $this->setUserPermissions([Permissions::ACCESS_REMOTE_EXPENSE]);
   }
@@ -52,8 +50,9 @@ abstract class AbstractRemoteExpenseHeadlessTestCase extends TestCase implements
    */
   protected function setUserPermissions(?array $permissions): void {
     $userPermissions = \CRM_Core_Config::singleton()->userPermissionClass;
-    // @phpstan-ignore-next-line
-    $userPermissions->permissions = $permissions;
+    if (NULL !== $permissions) {
+      $userPermissions->permissions = $permissions;
+    }
   }
 
 }

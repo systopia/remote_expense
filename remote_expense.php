@@ -15,14 +15,14 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
- declare(strict_types = 1);
+
+declare(strict_types = 1);
 
 // phpcs:disable PSR1.Files.SideEffects
 require_once 'remote_expense.civix.php';
 // phpcs:enable
 
-use Civi\RemoteCase\Api4\Permissions;
+use Civi\RemoteExpense\Api4\Permissions;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use CRM_RemoteExpense_ExtensionUtil as E;
@@ -50,7 +50,7 @@ function remote_case_civicrm_container(ContainerBuilder $container): void {
  *
  * @phpstan-param array<string, string|array{string, string}> $permissions
  */
-function remote_case_civicrm_permission(array &$permissions): void {
+function remote_case_civicrm_permission(array $permissions): void {
   $permissions[Permissions::ACCESS_REMOTE_EXPENSE] = [
     'label' => E::ts('CiviRemote: remote access to Expense'),
     'description' => E::ts('Access remote API of the Expense entity'),

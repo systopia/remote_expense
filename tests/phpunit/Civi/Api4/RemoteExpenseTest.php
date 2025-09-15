@@ -27,12 +27,12 @@ use Civi\RemoteExpense\Fixtures\ContactFixture;
 use Civi\RemoteExpense\Fixtures\ExpenseFixture;
 
 /**
- * @covers \Civi\Api4\RemoteCase
- * @covers \Civi\RemoteCase\RemoteCaseTestEntityProfile
+ * @covers \Civi\Api4\RemoteExpense
+ * @covers \Civi\RemoteExpense\RemoteExpenseTestEntityProfile
  *
  * @group headless
  */
-class RemoteExpenseTest extends AbstractRemoteCaseHeadlessTestCase {
+class RemoteExpenseTest extends AbstractRemoteExpenseHeadlessTestCase {
 
   public function testDelete(): void {
     $contact = ContactFixture::addIndividual();
@@ -114,7 +114,7 @@ class RemoteExpenseTest extends AbstractRemoteCaseHeadlessTestCase {
     $this->expectException(UnauthorizedException::class);
     RemoteExpense::getUpdateForm()
       ->setProfile('test')
-      ->setId($expense['id'])
+      ->setId((int)$expense['id'])
       ->execute();
   }
 

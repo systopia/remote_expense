@@ -17,7 +17,7 @@
 
 declare(strict_types = 1);
 
-namespace Civi\RemoteCase\Fixtures;
+namespace Civi\RemoteExpense\Fixtures;
 
 use Civi\Api4\CiviCase;
 
