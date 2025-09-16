@@ -55,6 +55,7 @@ function remote_expense_civicrm_permission(array $permissions): void {
     'label' => E::ts('CiviRemote: remote access to Expense'),
     'description' => E::ts('Access remote API of the Expense entity'),
   ];
+  \Civi::log()->debug(var_export($permissions, TRUE));
 }
 
 /**
