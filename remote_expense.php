@@ -51,10 +51,10 @@ function remote_expense_civicrm_container(ContainerBuilder $container): void {
  * @phpstan-param array<string, string|array{string, string}> $permissions
  */
 function remote_expense_civicrm_permission(array $permissions): void {
-  //$permissions[Permissions::ACCESS_REMOTE_EXPENSE] = [
-  //  'label' => E::ts('CiviRemote: remote access to Expense'),
-  //  'description' => E::ts('Access remote API of the Expense entity'),
-  //];
+  $permissions[Permissions::ACCESS_REMOTE_EXPENSE] = [
+    'label' => E::ts('CiviRemote: remote access to Expense'),
+    'description' => E::ts('Access remote API of the Expense entity'),
+  ];
 }
 
 /**
