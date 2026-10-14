@@ -18,7 +18,7 @@
   <version>0.1-dev</version>
   <develStage>dev</develStage>
   <compatibility>
-    <ver>5.75</ver>
+    <ver>6.2</ver>
   </compatibility>
   <requires>
     <ext>expenses</ext>

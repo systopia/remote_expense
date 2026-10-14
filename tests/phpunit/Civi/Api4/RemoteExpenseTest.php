@@ -22,7 +22,6 @@ namespace Civi\Api4;
 
 use Civi\API\Exception\UnauthorizedException;
 use Civi\RemoteExpense\AbstractRemoteExpenseHeadlessTestCase;
-use Civi\RemoteExpense\Fixtures\CaseFixture;
 use Civi\RemoteExpense\Fixtures\ContactFixture;
 use Civi\RemoteExpense\Fixtures\ExpenseFixture;
 
@@ -35,9 +34,8 @@ use Civi\RemoteExpense\Fixtures\ExpenseFixture;
 class RemoteExpenseTest extends AbstractRemoteExpenseHeadlessTestCase {
 
   public function testDelete(): void {
-    $contact = ContactFixture::addIndividual();
-    $case = CaseFixture::addFixture($contact['id']);
-    $expense = ExpenseFixture::addFixture($contact['id'], $case['id']);
+    $sourceContact = ContactFixture::addIndividual();
+    $expense = ExpenseFixture::addFixture($sourceContact['id']);
 
     $result = RemoteExpense::delete()
       ->setProfile('test')
@@ -54,9 +52,8 @@ class RemoteExpenseTest extends AbstractRemoteExpenseHeadlessTestCase {
 
     static::assertCount(0, $result);
 
-    $contact = ContactFixture::addIndividual();
-    $case = CaseFixture::addFixture($contact['id']);
-    $expense = ExpenseFixture::addFixture($contact['id'], $case['id']);
+    $sourceContact = ContactFixture::addIndividual();
+    $expense = ExpenseFixture::addFixture($sourceContact['id']);
 
     $result = RemoteExpense::get()
       ->setProfile('test')
@@ -66,8 +63,8 @@ class RemoteExpenseTest extends AbstractRemoteExpenseHeadlessTestCase {
     static::assertCount(1, $result);
     static::assertSame($expense['id'], $result->single()['id']);
     static::assertSame($expense['type_id'], $result->single()['type_id']);
-    static::assertSame($expense['contact_id'], $result->single()['contact_id']);
-    static::assertSame($expense['case_id'], $result->single()['case_id']);
+    static::assertSame($expense['source_contact_id'], $result->single()['source_contact_id']);
+    static::assertNull($result->single()['case_id']);
     static::assertFalse($result->single()['CAN_delete']);
     static::assertFalse($result->single()['CAN_update']);
 
@@ -95,26 +92,22 @@ class RemoteExpenseTest extends AbstractRemoteExpenseHeadlessTestCase {
   public function testGetFields(): void {
     $result = RemoteExpense::getFields()
       ->setProfile('test')
-      ->addSelect('*', 'CAN_delete', 'CAN_update')
       ->execute();
 
     $fields = $result->indexBy('name')->getArrayCopy();
     static::assertArrayHasKey('type_id', $fields);
-    static::assertArrayHasKey('contact_id', $fields);
-    static::assertArrayHasKey('case_id', $fields);
     static::assertArrayHasKey('CAN_delete', $fields);
     static::assertArrayHasKey('CAN_update', $fields);
   }
 
   public function testGetUpdateForm(): void {
-    $contact = ContactFixture::addIndividual();
-    $case = CaseFixture::addFixture($contact['id']);
-    $expense = ExpenseFixture::addFixture($contact['id'], $case['id']);
+    $sourceContact = ContactFixture::addIndividual();
+    $expense = ExpenseFixture::addFixture($sourceContact['id']);
 
     $this->expectException(UnauthorizedException::class);
     RemoteExpense::getUpdateForm()
       ->setProfile('test')
-      ->setId((int)$expense['id'])
+      ->setId((int) $expense['id'])
       ->execute();
   }
 
