@@ -30,11 +30,10 @@ final class ExpenseFixture {
    *
    * @throws \CRM_Core_Exception
    */
-  public static function addFixture(int $contactId, int $caseId, array $values = []): array {
+  public static function addFixture(int $sourceContactId, array $values = []): array {
     return Expense::create(FALSE)->setValues([
       'type_id' => 1,
-      'contact_id' => $contactId,
-      'case_id' => $caseId,
+      'source_contact_id' => $sourceContactId,
     ] + $values)->execute()->single();
   }
 

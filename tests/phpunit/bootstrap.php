@@ -1,6 +1,7 @@
 <?php
 declare(strict_types = 1);
 
+use Civi\RemoteExpense\RemoteExpenseTestEntityProfile;
 use Composer\Autoload\ClassLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -46,6 +47,8 @@ if (!function_exists('ts')) {
  * Modify DI container for tests.
  */
 function _remote_expense_test_civicrm_container(ContainerBuilder $container): void {
+  $container->autowire(RemoteExpenseTestEntityProfile::class)
+    ->addTag(RemoteExpenseTestEntityProfile::SERVICE_TAG);
 }
 
 function addExtensionToClassLoader(ClassLoader $loader, string $extension): void {
