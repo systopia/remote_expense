@@ -19,7 +19,7 @@ declare(strict_types = 1);
 
 namespace Civi\RemoteExpense\Fixtures;
 
-use \Civi\Api4\Expense;
+use Civi\Api4\Expense;
 
 final class ExpenseFixture {
 

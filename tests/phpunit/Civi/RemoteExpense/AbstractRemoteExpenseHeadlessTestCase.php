@@ -31,7 +31,7 @@ abstract class AbstractRemoteExpenseHeadlessTestCase extends TestCase implements
 // phpcs:enable
   public function setUpHeadless(): CiviEnvBuilder {
     return Test::headless()
-      ->install('expense')
+      ->install('expenses')
       ->install('de.systopia.identitytracker')
       ->install('de.systopia.remotetools')
       ->installMe(__DIR__)

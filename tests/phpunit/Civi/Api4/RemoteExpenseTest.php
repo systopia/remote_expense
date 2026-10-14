@@ -114,7 +114,7 @@ class RemoteExpenseTest extends AbstractRemoteExpenseHeadlessTestCase {
     $this->expectException(UnauthorizedException::class);
     RemoteExpense::getUpdateForm()
       ->setProfile('test')
-      ->setId((int)$expense['id'])
+      ->setId((int) $expense['id'])
       ->execute();
   }
 

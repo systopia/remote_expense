@@ -48,7 +48,7 @@ function remote_expense_civicrm_container(ContainerBuilder $container): void {
 /**
  * Implements hook_civicrm_permission().
  *
- * @phpstan-param array<string, string|array{string, string}> $permissions
+ * @phpstan-param array<string, array<string, string>> $permissions
  */
 function remote_expense_civicrm_permission(array &$permissions): void {
   $permissions[Permissions::ACCESS_REMOTE_EXPENSE] = [
